@@ -1,3 +1,4 @@
+#!/home/pi/Documents/dev/auto_ip/sandbox/bin/python
 import os
 
 from dotenv import load_dotenv
@@ -13,12 +14,12 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("window-size=1920,1080")
 
-driver = webdriver.Chrome("./chromedriver.exe", options=chrome_options)
+driver = webdriver.Chrome("chromedriver", options=chrome_options)
 
-ip = get('https://api.ipify.org').text
-
-index = 0
 try:
+    ip = get('https://api.ipify.org').text
+
+    index = 0
     while True:
         conf = str(os.environ.get("CONF_{}".format(index))).split("#")
 

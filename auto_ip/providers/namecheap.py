@@ -4,9 +4,10 @@ from providers.abstract_provider import AbstractProvider
 class NameCheap(AbstractProvider):
     name = "namecheap"
     url = "https://namecheap.com"
+    logged_in = False
 
     @staticmethod
-    def scrap(driver, username, password, domain, ip):
+    def login(driver, username, password):
         driver.get("https://www.namecheap.com/myaccount/login/")
 
         username_input = driver.find_elements_by_class_name("nc_username_required")[0]
@@ -18,18 +19,16 @@ class NameCheap(AbstractProvider):
         password_input.send_keys(password)
         login_button.click()
 
-        selected_domain = NameCheap.wait_element(lambda x: x.find_element_by_xpath(
-            "//a[contains(@href,'/domains/domaincontrolpanel/" + domain + "/domain')]"), driver)
-        selected_domain.click()
+        NameCheap.logged_in = True
 
-        driver.find_element_by_xpath(
-            "//a[contains(@href,'/Domains/DomainControlPanel/" + domain + "/advancedns')]").click()
+    @staticmethod
+    def scrap(driver, username, password, domain, ip):
+        if not NameCheap.logged_in:
+            NameCheap.login(driver, username, password)
 
-        allow_cookies_btn = NameCheap.wait_element(lambda x: x.find_elements_by_class_name("accept-cookies-button"),
-                                                   driver)[0]
-        allow_cookies_btn.click()
+        driver.get("https://ap.www.namecheap.com/Domains/DomainControlPanel/" + domain + "/advancedns")
 
-        value_td = driver.find_elements_by_class_name("value")[1]
+        value_td = NameCheap.wait_element(lambda x: x.find_elements_by_class_name("value")[1], driver)
         value_p = value_td.find_elements_by_tag_name("p")[0]
         value_p.click()
 
