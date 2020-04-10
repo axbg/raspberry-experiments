@@ -1,4 +1,4 @@
-import time
+from time import sleep
 
 from selenium.common.exceptions import NoSuchElementException
 
@@ -16,7 +16,7 @@ class AbstractProvider:
         retries = 0
         element = None
         while not element:
-            time.sleep(1)
+            sleep(1)
             retries += 1
             try:
                 element = get_element(driver)

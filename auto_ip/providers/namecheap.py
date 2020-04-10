@@ -8,7 +8,7 @@ class NameCheap(AbstractProvider):
 
     @staticmethod
     def login(driver, username, password):
-        driver.get("https://www.namecheap.com/myaccount/login/")
+        driver.get(NameCheap.url + "/myaccount/login/")
 
         username_input = driver.find_elements_by_class_name("nc_username_required")[0]
         password_input = driver.find_elements_by_class_name("nc_password")[0]
