@@ -1,0 +1,12 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    text-align: center;
+    background-color: whitesmoke;
+    padding: 10px;
+    box-sizing: border-box;
+}
