@@ -1,7 +1,10 @@
+import json
 from threading import Thread
+from time import sleep
 
 from flask import render_template, Response
 
+from database import Event
 from observer import Observer
 from server import app
 
@@ -11,12 +14,21 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/data")
+def data():
+    event_data = [x.to_json() for x in Event.query.all()]
+    return Response(json.dumps(event_data), mimetype="application/json")
+
+
 @app.route("/stream")
 def stream():
-    return Response(Observer.get_frame(), mimetype="multipart/x-mixed-replace; boundary=frame;")
+    observer_instance = app.config.get("OBSERVER_INSTANCE")
+    return Response(observer_instance.get_frame(), mimetype="multipart/x-mixed-replace; boundary=frame;")
 
 
 if __name__ == '__main__':
-    observer_thread = Thread(target=Observer.loop_detection)
-    observer_thread.start()
+    observer = Observer()
+    app.config["OBSERVER_INSTANCE"] = observer
+    Thread(target=observer.loop_detection).start()
+    sleep(5)
     app.run()
