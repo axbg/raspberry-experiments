@@ -1,6 +1,7 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from threading import Lock, Thread
 
+import os
 import cv2
 import cvlib as cv
 from cvlib.object_detection import draw_bbox
@@ -29,6 +30,7 @@ class Observer:
         self.found = False
         self.found_timestamp = None
         self.lost_timestamp = None
+        self.last_time_saved = None
         self.missed_frame = MISSED_FRAME_COUNTER
 
     def loop_detection(self):
@@ -38,13 +40,18 @@ class Observer:
     def detect(self):
         ret, im = Observer.cam.read()
         bbox, labels, conf = cv.detect_common_objects(im)
-
         if "cat" in labels:
             self.found = True
             self.missed_frame = MISSED_FRAME_COUNTER
             self.lost_timestamp = None
             if self.found_timestamp is None:
                 self.found_timestamp = datetime.now()
+
+            now = datetime.now()
+            if self.last_time_saved is None or now > self.last_time_saved:
+                self.last_time_saved = now + timedelta(minutes = 5)
+                image_path = str(now.timestamp()) + ".jpg"
+                cv2.imwrite(os.path.join(os.getcwd(), 'cat', image_path), im)
 
             im = draw_bbox(img=im, bbox=bbox, confidence=conf, labels=labels, colors=Observer.colors)
         elif self.found:
