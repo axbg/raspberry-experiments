@@ -40,7 +40,7 @@ def format_temperature_offset(temp):
 
 def loop_time_and_temperature(temp):
     index = 0
-    while index < 7:
+    while index < 20:
         index += 1
         with canvas(virtual) as draw:
             current_time = datetime.now()

@@ -22,7 +22,8 @@ def main():
             with canvas(virtual) as draw:
                 text(draw, (4, 0), temp, fill="white", font=proportional(CP437_FONT))
                 sleep(0.5)
-    except Exception:
+    except Exception as e:
+        print(e)
         GPIO.cleanup()
     except KeyboardInterrupt:    
         pass
