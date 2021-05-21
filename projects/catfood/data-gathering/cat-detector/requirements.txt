@@ -4,4 +4,4 @@ opencv-python==4.2.0.34
 Pillow==8.1.1
 Flask-SQLAlchemy==2.4.1
 cvlib==0.2.5
-tensorflow==2.1.2
+tensorflow==2.5.0
