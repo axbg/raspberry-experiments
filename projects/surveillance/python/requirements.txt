@@ -1,5 +1,5 @@
 imutils==0.5.3
 numpy==1.17.4
-opencv-python==4.1.2.30
+opencv-python==4.2.0.32
 pyzmq==18.1.1
 zmq==0.0.0
