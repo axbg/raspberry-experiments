@@ -1,1 +1,2 @@
 mpu6050-raspberrypi==1.1
+smbus==1.1.post2
