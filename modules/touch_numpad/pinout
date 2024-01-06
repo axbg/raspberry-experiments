@@ -1,0 +1,4 @@
+VCC -  1 (3.3V)
+GND -  6 (GND)
+SCL -  7 (GPIO4)
+SDO - 11 (GPIO17)

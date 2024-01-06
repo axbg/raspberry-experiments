@@ -1,0 +1,5 @@
+note: S and - marks are reversed
+
+- (actually S) - 37 (GPIO26)
++              - 1 (5V)
+S (actually -) - 6 (GND)

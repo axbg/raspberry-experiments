@@ -1,0 +1,4 @@
+VCC - 1 (3.3V)
+GND - 6 (GND)
+SCL - 5 (GPIO3)
+SDA - 3 (GPIO2)

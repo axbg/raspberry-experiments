@@ -1,0 +1,2 @@
+- the output of the sensor is analogue, but it can be connected to a digital pin, such as a GPIO pin, to detect if the light exceeds a certain threshold
+- it won't detect small changes in light levels though

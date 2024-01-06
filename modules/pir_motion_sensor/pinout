@@ -1,0 +1,13 @@
+GND - 6 (GND)
+OUT - 8 (GPIO14)
+5V  - 4 (5V)
+
+- sensor back layout
+ ______________________________
+|      GND     OUT     5V      |
+|                              | 
+|                              |
+|                              |
+ ______________________________|
+   DISTANCE         TIME ON
+   ADJUSTMENT       ADJUSTMENT

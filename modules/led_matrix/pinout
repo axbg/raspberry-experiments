@@ -1,0 +1,5 @@
+VCC - 4 (5V)
+GND - 6 (GND)
+DIN - 19 (GPIO10)
+CS - 24 (GPIO8)
+CLK - 23 (GPIO11)
